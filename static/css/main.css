@@ -1,0 +1,23 @@
+body{
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+html{
+  width: 100%;
+  height: 100%;
+}
+#app{
+  width: 100%;
+  height: 100%;
+}
+a, a:focus, a:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+.el-menu--horizontal a {
+  color: #909399;
+}
+.el-menu--horizontal a:focus, a:hover {
+  color: #303133;
+}
