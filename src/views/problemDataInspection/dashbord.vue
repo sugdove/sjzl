@@ -6,6 +6,7 @@
           数据治理首页
         </div>
           <boxList></boxList>
+          <line1></line1>
           <chart1 style="padding: 20px 0px 20px 0px;"></chart1>
           <chart2></chart2>
   </div>
@@ -14,11 +15,13 @@
 import boxList from './components/boxList.vue'
 import chart1 from './components/chart1.vue'
 import chart2 from './components/chart2.vue'
+import line1 from './components/zztChart.vue'
 export default {
   components:{
      boxList,
      chart1,
-     chart2
+     chart2,
+     line1
   },
   data(){
     return{

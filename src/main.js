@@ -8,6 +8,7 @@ import Loading from '@/components/Loading'
 import echarts from 'echarts'
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts
+
 Vue.use(Loading)
 Vue.use(Element)
 new Vue({

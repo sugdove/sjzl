@@ -13,33 +13,39 @@
     </div> -->
     <el-row>
       <el-col :offset="2" span="3">
-        <div style="font-family: 'Arial-BoldMT', 'Arial Bold', 'Arial', sans-serif;
+        <!-- <div style="font-family: 'Arial-BoldMT', 'Arial Bold', 'Arial', sans-serif;
     font-weight: 700;
     font-style: normal;
     font-size: 14px;
     text-align: left;
-    color: rgb(188, 188, 188);
+    background:'red'!important;
+    color: #fff;
     display: flex;
     align-items: center;
     height: 56px;">
           数据治理<img src="@/assets/images/home.png" alt="" style="width: 15px;
     height: 15px;
     margin-left: 3px;">
-        </div>
+        </div> -->
+        <div class="treeBox">
+               <div class="tree">数据治理</div>
      <el-menu
       default-active="1"
       class="el-menu-vertical-demo"
       >
       <el-menu-item index="1" @click.native="active = '1'">
-        <span slot="title">数据治理首页</span>
+        <span slot="title" class="tree1">数据治理首页</span>
       </el-menu-item>
       <el-menu-item index="2"  @click.native="active = '2'">
-        <span slot="title">问题数据列表</span>
+        <span slot="title" class="tree1">问题数据列表</span>
       </el-menu-item>
       <!-- <el-menu-item index="3"  @click.native="active = '3'">
         <span slot="title">全文检索</span>
       </el-menu-item> -->
     </el-menu>
+
+        </div>
+     
     </el-col>
     <el-col :span="17">
           <dashbord v-if=" active==='1' "></dashbord>
@@ -78,13 +84,51 @@ export default {
   }
 }
 </script>
-<style >
+<style lang='scss'>
+
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
     min-height: 400px;
-    border-right: none;
+   
   }
   .pager-wrapper{
     float:right
   }
+  
+  .tree{
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background: red;
+    color: #fff;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 800;
+    border-radius: 5px;
+    background-image: url('./problemDataInspection/img/bg.png');
+    background-size: 100% 100% ;
+    margin-left: -20px;
+  }
+  .el-menu-vertical-demo{
+     border:1px solid #eee;
+     padding: 30px;
+     padding-top:0 ;
+     margin-left: -19px;
+     border-top:none;
+    /deep/
+    .el-menu-item{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 10px;
+    width: 220px;
+     margin-left: 23px;
+     padding-left:30px;
+     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+     color: #265aa3;
+      margin-left: -10px;
+  }
+  }
+  
 </style>

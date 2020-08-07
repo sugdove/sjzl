@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="loadingBox">
+  <div v-loading="loadingBox" class="wrap">
     <el-row :gutter="20">
       <el-col style="width:20%" v-for="(item,index) in boxData" :key="index">
         <div class="box" :style="{background:item.background}">
@@ -89,6 +89,10 @@ export default {
 }
 </script>
 <style lang="scss" scope>
+.wrap{
+  padding: 30px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+}
 .box {
   height: 120px;
   border-radius: 10px;
