@@ -3,10 +3,10 @@
     <div class="tit">
       <div>
         <span></span>
-        问题单位对比
+        系统问题数据统计
       </div>
       <div>
-        <el-select v-model="value" placeholder="请选择" size='mini'>
+        <el-select v-model="value" placeholder="请选择" size="mini">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -28,178 +28,205 @@
 </template>
 <script>
 import echarts from "echarts";
+import { getChart3 } from "@/api/problemDataInspection.js";
+import { getChart4 } from "@/api/problemDataInspection.js";
+
 export default {
-     data() {
-      return {
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        value: ''
-      }
+  data() {
+    return {
+      options: [
+        {
+          value: "today",
+          label: "本日统计",
+        },
+        {
+          value: "week_day",
+          label: "本周统计",
+        },
+        {
+          value: "month_day",
+          label: "本月统计",
+        },
+        {
+          value: "year_day",
+          label: "本年统计",
+        },
+      ],
+      value: "today",
+    };
+  },
+  watch: {
+    value() {
+      this.getZzt();
     },
+  },
   mounted() {
     this.getZzt();
     this.getPie();
   },
   methods: {
     getZzt() {
-      var dom = document.getElementsByClassName("line")[0];
-      var echartCon = echarts.init(dom);
-      var option = {
-        tooltip: {
-          trigger: "axis",
-          axisPointer: {
-            // 坐标轴指示器，坐标轴触发有效
-            type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
-          },
-        },
-        grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "5%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "value",
-          max: 400,
-        },
-        yAxis: {
-          type: "category",
-          data: [
-            "单位名称1",
-            "单位名称2",
-            "单位名称3",
-            "单位名称4",
-            "单位名称15",
-          ],
-        },
-        series: [
-          {
-            name: "A级门店",
-            type: "bar",
-            stack: "总量",
-            barWidth: 30,
-            itemStyle: {
-              normal: {
-                color: "#06d3cd",
-                barBorderRadius: [20, 20, 20, 20],
-              },
+      getChart3({ statisticPeriod: this.value }).then((res) => {
+        const yAxis = res.data.map((el) => el.name);
+        const xAxis = res.data.map((el) => el.counts);
+        var dom = document.getElementsByClassName("line")[0];
+        var echartCon = echarts.init(dom);
+        var option = {
+          tooltip: {
+            trigger: "axis",
+            axisPointer: {
+              // 坐标轴指示器，坐标轴触发有效
+              type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
             },
-            label: {
-              normal: {
-                show: true,
-                position: "insideRight",
-              },
-            },
-            z: 10,
-            data: [320, 302, 301, 330, 320],
           },
+          grid: {
+            left: "3%",
+            right: "4%",
+            bottom: "5%",
+            containLabel: true,
+          },
+          xAxis: {
+            type: "value",
+          },
+          yAxis: {
+            type: "category",
+            data: yAxis,
+          },
+          series: [
+            {
+              name: "问题数量",
+              type: "bar",
+              stack: "总量",
+              barWidth: 30,
+              itemStyle: {
+                normal: {
+                  color: "#06d3cd",
+                  barBorderRadius: [20, 20, 20, 20],
+                },
+              },
+              label: {
+                normal: {
+                  show: true,
+                  position: "insideRight",
+                },
+              },
+              z: 10,
+              data: xAxis,
+            },
 
-          {
-            // 灰色背景柱状图
-            type: "bar",
-            barGap: "-100%",
-            barWidth: 30,
-            itemStyle: {
-              normal: {
-                color: "#ccc",
-                barBorderRadius: [20, 20, 20, 20],
-              },
-            },
-            z: -10,
-            data: ["1000", "1000", "1000", "1000", "1000"],
-          },
-        ],
-      };
-      echartCon.setOption(option, true);
+            // {
+            //   // 灰色背景柱状图
+            //   type: "bar",
+            //   barGap: "-100%",
+            //   barWidth: 30,
+            //   itemStyle: {
+            //     normal: {
+            //       color: "#ccc",
+            //       barBorderRadius: [20, 20, 20, 20],
+            //     },
+            //   },
+            //   z: -10,
+            //   data: ["1000", "1000", "1000", "1000", "1000"],
+            // },
+          ],
+        };
+        echartCon.setOption(option, true);
+      });
     },
 
     getPie() {
-      var dom = document.getElementsByClassName("line1")[0];
-      var echartCon = echarts.init(dom);
-      var option = {
-        title: {
-          //   text: "某站点用户访问来源",
-          //   subtext: "纯属虚构",
-          //   left: "center",
-        },
-        tooltip: {
-          trigger: "item",
-          formatter: "{a} <br/>{b} : {c} ({d}%)",
-        },
-        legend: {
-          orient: "vertical",
-          left: "right",
-          top: "bottom",
-          data: ["直接访问", "邮件营销", "联盟广告", "视频广告", "搜索引擎"],
-        },
-        series: [
-          {
-            name: "访问来源",
-            type: "pie",
-            radius: "55%",
-            center: ["50%", "50%"],
-            data: [
-              {
-                value: 335,
-                name: "直接访问",
-                itemStyle: {
-                  color: "#ffa800",
+      getChart4().then((res) => {
+        const lengendList = res.data.map((el) => el.name);
+        const itemStyleList = [
+          "#ffa800",
+          "#b250ff",
+          "#4f9aff",
+          "#4bf3ff",
+          "#ee6378",
+        ];
+        const seriesDataList = res.data.map((el, index) => {
+          return {
+            value: el.counts,
+            name: el.name,
+            itemStyle: { color: itemStyleList[index] },
+          };
+        });
+
+        var dom = document.getElementsByClassName("line1")[0];
+        var echartCon = echarts.init(dom);
+        var option = {
+          title: {
+            //   text: "某站点用户访问来源",
+            //   subtext: "纯属虚构",
+            //   left: "center",
+          },
+          tooltip: {
+            trigger: "item",
+            formatter: "{a} <br/>{b} : {c} ({d}%)",
+          },
+          legend: {
+            orient: "vertical",
+            left: "right",
+            top: "bottom",
+            data: lengendList,
+          },
+          series: [
+            {
+              name: "问题数据分类",
+              type: "pie",
+              radius: "55%",
+              center: ["50%", "50%"],
+              data: seriesDataList,
+              // [
+              //   {
+              //     value: 335,
+              //     name: "直接访问",
+              //     itemStyle: {
+              //       color: "#ffa800",
+              //     },
+              //   },
+              //   {
+              //     value: 310,
+              //     name: "邮件营销",
+              //     itemStyle: {
+              //       color: "#b250ff",
+              //     },
+              //   },
+              //   {
+              //     value: 234,
+              //     name: "联盟广告",
+              //     itemStyle: {
+              //       color: "#4f9aff",
+              //     },
+              //   },
+              //   {
+              //     value: 135,
+              //     name: "视频广告",
+              //     itemStyle: {
+              //       color: "#4bf3ff",
+              //     },
+              //   },
+              //   {
+              //     value: 1548,
+              //     name: "搜索引擎",
+              //     itemStyle: {
+              //       color: "#ee6378",
+              //     },
+              //   },
+              // ],
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: "rgba(0, 0, 0, 0.5)",
                 },
-              },
-              {
-                value: 310,
-                name: "邮件营销",
-                itemStyle: {
-                  color: "#b250ff",
-                },
-              },
-              {
-                value: 234,
-                name: "联盟广告",
-                itemStyle: {
-                  color: "#4f9aff",
-                },
-              },
-              {
-                value: 135,
-                name: "视频广告",
-                itemStyle: {
-                  color: "#4bf3ff",
-                },
-              },
-              {
-                value: 1548,
-                name: "搜索引擎",
-                itemStyle: {
-                  color: "#ee6378",
-                },
-              },
-            ],
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
               },
             },
-          },
-        ],
-      };
-      echartCon.setOption(option, true);
+          ],
+        };
+        console.log(option, "console.log(option)console.log(option)");
+        echartCon.setOption(option, true);
+      });
     },
   },
 };
@@ -232,12 +259,11 @@ export default {
     line-height: 40px;
     float: left;
     padding-left: 10px;
-    padding-right:30px;
+    padding-right: 30px;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     div {
-       
       span {
         width: 4px;
         height: 16px;
@@ -245,7 +271,7 @@ export default {
         display: inline-block;
         margin-right: 5px;
         position: relative;
-        top:2px;
+        top: 2px;
       }
     }
   }
@@ -263,8 +289,8 @@ export default {
       background: #15a1fa;
       display: inline-block;
       margin-right: 5px;
-       position: relative;
-        top:2px;
+      position: relative;
+      top: 2px;
     }
   }
 }

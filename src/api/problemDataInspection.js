@@ -66,6 +66,22 @@ export const getChart2 = (params) => {
   });
 };
 
+// 问题单位对比图形 statisticPeriod=today
+export const getChart3 = (params) => {
+  return request({
+    url: prefixUrl + `/curd_/dsgDataGovern/query/statistics/validate/businessTopN`,
+    method: "get",
+    params:params
+  });
+};
+
+// 问题数据分类图形 size = 5
+export const getChart4 = () => {
+  return request({
+    url: prefixUrl + `/curd_/dsgDataGovern/query/statistics/validate/distributionTopN?size=5`,
+    method: "get",
+  });
+};
 // 数据整改
 export const updateErrorData = (params) => {
   return request({
@@ -74,3 +90,4 @@ export const updateErrorData = (params) => {
     data:params
   });
 };
+

@@ -27,14 +27,14 @@ export default {
           label: '累计数据问题量',
           value: '5682',
           time: '5分钟前',
-          background:'linear-gradient(180deg, rgba(30, 198, 149, 1) 0%, rgba(30, 198, 149, 1) 0%, rgba(51, 204, 204, 1) 100%, rgba(51, 204, 204, 1) 100%)'
+          background:'linear-gradient(to right, #2ee1ed 0%, #2ee1ed 0%, #66befc 100%, #66befc 100%)'
         },
         {
           label: '累计治理问题量',
           value: '5890',
           time: '10分钟前',
           imgUrl: 'static/rule_img/testRule.png',
-          background:'linear-gradient(90deg, rgba(244, 174, 149, 1) 0%, rgba(244, 174, 149, 1) 0%, rgba(226, 113, 140, 1) 100%, rgba(226, 113, 140, 1) 100%)'
+          background:'linear-gradient(to right, #ff748d 0%, #ff748d 0%, #ff7daf 100%, #ff7daf 100%)'
 
         },
         {
@@ -42,21 +42,21 @@ export default {
           value: '6980',
           time: '5分钟前',
           imgUrl: 'static/rule_img/testRule.png',
-          background:'linear-gradient(180deg, rgba(255, 153, 51, 1) 0%, rgba(255, 153, 51, 1) 0%, rgba(239, 203, 45, 1) 100%, rgba(239, 203, 45, 1) 100%)'
+          background:'linear-gradient(to right, #9f56cb 0%, #9f56cb 0%, #e85ad1 100%, #e85ad1 100%)'
         },
         {
           label: '昨日新增问题数据量',
           value: '208',
           time: '5分钟前',
           imgUrl: 'static/rule_img/testRule.png',
-          background:'linear-gradient(180deg, rgba(45, 169, 250, 1) 0%, rgba(45, 169, 250, 1) 0%, rgba(102, 204, 255, 1) 100%, rgba(102, 204, 255, 1) 100%)'
+          background:'linear-gradient(to right, #e78607 0%, #e78607 0%, #fd644f 100%, #fd644f 100%)'
         },
         {
           label: '昨日治理数据问题量',
           value: '208',
           time: '5分钟前',
           imgUrl: 'static/rule_img/testRule.png',
-          background:'#c084f7'
+          background:'linear-gradient(to right, #0fcf89 0%, #0fcf89 0%, #18a86b 100%, #18a86b 100%)'
         },
       ],
       loadingBox:true

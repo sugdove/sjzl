@@ -3,7 +3,11 @@
     <div style="height: 62px;
     color: #7f7f7f;
     font-size: 14px;">
-      数据治理>问题数据列表
+      <el-breadcrumb separator="/">
+  <el-breadcrumb-item><a href="/admin/#/portal/index">首页</a></el-breadcrumb-item>
+  <el-breadcrumb-item><a @click="reload">数据治理</a></el-breadcrumb-item>
+  <el-breadcrumb-item>治理问题列表</el-breadcrumb-item>
+</el-breadcrumb>
       <el-select v-model="isMine" style="float:right">
         <el-option
           v-for="(item,index) in isMineList"
@@ -153,6 +157,9 @@ export default {
     },
   },
   methods: {
+    reload(){
+      location.reload()
+    },
     // 表头样式设置
     headClass() {
       return "background:#e1ebf9;";

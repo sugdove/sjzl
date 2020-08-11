@@ -3,8 +3,12 @@
     <div style="height: 35px;
     color: #7f7f7f;
     font-size: 14px;">
-          数据治理>问题数据列表>问题数据清单
-            <el-button @click="closeDetail" type="primary" size='mini' style="float:right;margin-top: -3px;">返回</el-button>
+         <el-breadcrumb separator="/">
+  <el-breadcrumb-item><a href="/admin/#/portal/index">首页</a></el-breadcrumb-item>
+  <el-breadcrumb-item><a @click="reload">数据治理</a></el-breadcrumb-item>
+  <el-breadcrumb-item>问题数据清单</el-breadcrumb-item>
+</el-breadcrumb>
+            <el-button @click="closeDetail" type="primary" size='mini' style="float:right;margin-top: -20px;">返回</el-button>
         </div>
         <div style="color:#c084f7;font-size: 18px;font-family: 'Arial-BoldMT', 'Arial Bold', 'Arial', sans-serif;
     font-weight: 700;
@@ -192,6 +196,9 @@ export default {
     }
   },
   methods: {
+    reload(){
+      location.reload()
+    },
     getTableList () {
       this.tableLoading = true
       const params = {

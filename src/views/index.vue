@@ -34,10 +34,10 @@
       class="el-menu-vertical-demo"
       >
       <el-menu-item index="1" @click.native="active = '1'">
-        <span slot="title" class="tree1">数据治理首页</span>
+        <span slot="title" class="tree1"><img src="./problemDataInspection/img/fireProtect.png" class="imgTitle"></img>治理总览</span>
       </el-menu-item>
       <el-menu-item index="2"  @click.native="active = '2'">
-        <span slot="title" class="tree1">问题数据列表</span>
+        <span slot="title" class="tree1"><img src="./problemDataInspection/img/service.png" class="imgTitle"></img>治理问题列表</span>
       </el-menu-item>
       <!-- <el-menu-item index="3"  @click.native="active = '3'">
         <span slot="title">全文检索</span>
@@ -129,6 +129,13 @@ export default {
      color: #265aa3;
       margin-left: -10px;
   }
+  }
+  .imgTitle{
+        width: 20px;
+    height: 20px;
+    color: #265aa3;
+    padding-right: 8px;
+    margin-top: -3px;
   }
   
 </style>

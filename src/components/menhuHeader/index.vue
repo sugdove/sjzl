@@ -38,7 +38,7 @@
               <img v-else src="./img/header_img.jpg" />
               <el-dropdown>
                 <span class="el-dropdown-link">
-                  欢迎 {{user.realname}}
+                  欢迎 {{realname}}
                   <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu class="dropdown_wrap_user" slot="dropdown">

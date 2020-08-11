@@ -25,26 +25,26 @@ module.exports = {
           "^/curd_": "/",
         },
       },
-      "/user": {
-        target: `${url}/`,
-        // target: `http://192.168.24.248:10008`, //宋恒 
-        // target: `http://192.168.24.238:10008`, //郑
-        // target: `http://192.168.24.245:10008`, //罗凤
-        changeOrigin: true,
-        pathRewrite: {
-          "^/user": "/",
-        },
-      },
-      "/menhu": {
-        target: `${url}/admin-ht`,
-        // target: `http://192.168.24.248:10008`, //宋恒 
-        // target: `http://192.168.24.238:10008`, //郑
-        // target: `http://192.168.24.245:10008`, //罗凤
-        changeOrigin: true,
-        pathRewrite: {
-          "^/menhu": "/",
-        },
-      },
+      // "/user": {
+      //   target: `${url}/`,
+      //   // target: `http://192.168.24.248:10008`, //宋恒 
+      //   // target: `http://192.168.24.238:10008`, //郑
+      //   // target: `http://192.168.24.245:10008`, //罗凤
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     "^/user": "/",
+      //   },
+      // },
+      // "/menhu": {
+      //   target: `${url}/admin-ht`,
+      //   // target: `http://192.168.24.248:10008`, //宋恒 
+      //   // target: `http://192.168.24.238:10008`, //郑
+      //   // target: `http://192.168.24.245:10008`, //罗凤
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     "^/menhu": "/",
+      //   },
+      // },
     },
   },
   configureWebpack: {

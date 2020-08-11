@@ -37,7 +37,7 @@ export function msgStatus(params) {
 }
 export function getInfo() {
   return request({
-    url: '/user/api/admin/user/front/info',
+    url: '/api/admin/user/front/info',
     method: 'get'
   })
 }
