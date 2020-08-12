@@ -1,6 +1,6 @@
 <template>
   <div style="padding:20px">   
-        <div style="height: 62px;
+        <div style="height: 30px;
     color: #7f7f7f;
     font-size: 14px;">
           <el-breadcrumb separator="/">

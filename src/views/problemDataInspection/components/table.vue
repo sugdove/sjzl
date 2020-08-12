@@ -22,7 +22,7 @@
         style="display: flex;
     align-items: center;
     height: 83px;
-    border: 1px solid rgba(242, 242, 242, 1);justify-content: center;"
+    border: 1px solid rgba(242, 242, 242, 1);justify-content: center;background:#fff"
         label-width="80px"
       >
         <el-row style="width: 100%;">
@@ -46,7 +46,7 @@
     <el-tabs
       v-model="chooseTab"
       style="background: white;
-    border-radius: 1px;margin-top:20px
+    border-radius: 1px;margin-top:20px;padding: 0px 10px 0px 10px;
     "
     >
       <el-tab-pane

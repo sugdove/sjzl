@@ -1,6 +1,8 @@
 <template>
   <div class="wraps">
-    <div class="tit">
+    <div class="box">
+      <div class="cardBox" style="margin-right: 10px;">
+      <div class="tit">
       <div>
         <span></span>
         系统问题数据统计
@@ -16,13 +18,16 @@
         </el-select>
       </div>
     </div>
-    <div class="tit1">
+      <div class="line"></div>
+      </div>
+      <div class="cardBox">
+        <div class="tit1">
       <span></span>
       问题数据分类
     </div>
-    <div class="box">
-      <div class="line"></div>
       <div class="line1"></div>
+      
+      </div>
     </div>
   </div>
 </template>
@@ -80,6 +85,7 @@ export default {
             },
           },
           grid: {
+            top:"2%",
             left: "3%",
             right: "4%",
             bottom: "5%",
@@ -164,6 +170,13 @@ export default {
             trigger: "item",
             formatter: "{a} <br/>{b} : {c} ({d}%)",
           },
+          grid: {
+            top:"2%",
+            left: "3%",
+            right: "4%",
+            bottom: "5%",
+            containLabel: true,
+          },
           legend: {
             orient: "vertical",
             left: "right",
@@ -236,25 +249,34 @@ export default {
   width: 100%;
   height: 400px;
   margin-top: 20px;
-  margin-bottom: 50px;
   .box {
     width: 100%;
     height: 400px;
     display: flex;
   }
+  .cardBox{
+    background:#fff;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+     flex-direction: column;
+      width: 100%;
+    height: 400px;
+    display: flex;
+    
+  }
   .line {
     flex: 1;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
     padding: 10px;
   }
   .line1 {
     flex: 1;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
     margin-left: 20px;
     padding: 10px;
   }
   .tit {
-    width: 50%;
+    color:black;
+    width: 100%;
     height: 40px;
     line-height: 40px;
     float: left;
@@ -276,13 +298,13 @@ export default {
     }
   }
   .tit1 {
-    width: 50%;
+    color:black;
+    width: 100%;
     height: 40px;
     line-height: 40px;
     float: left;
     padding-left: 10px;
     box-sizing: border-box;
-
     span {
       width: 4px;
       height: 16px;

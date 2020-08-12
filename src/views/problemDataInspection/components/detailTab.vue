@@ -12,7 +12,7 @@
         </div>
         <div style="color:#c084f7;font-size: 18px;font-family: 'Arial-BoldMT', 'Arial Bold', 'Arial', sans-serif;
     font-weight: 700;
-    font-style: normal">
+    font-style: normal;margin: 0px 0px 10px 0px;">
            {{`${chooseRow.systemName ? chooseRow.systemName : '未指定'} > ${chooseRow.businessName ? chooseRow.businessName : '未指定'}`}}
           <a :href="`/curd_/dsgDataGovern/exportProblemData?metadataId=${chooseRow.hashedName}&orgId=1&entityId=${chooseRow.entityId}&isMine=${isMine}`">
            <el-button type='primary' style="margin-left:10px">导出</el-button></a>
@@ -49,7 +49,7 @@
       </el-form>
     </div>-->
     <el-tabs v-model="chooseTab" style="background: white;
-    border-radius: 1px;">
+    border-radius: 1px;padding: 0px 10px 0px 10px;">
       <!-- padding: 13px 13px 0px 13px; -->
       <el-tab-pane
         v-for="(item,index) in tabList"

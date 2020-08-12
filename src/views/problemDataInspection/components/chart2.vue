@@ -1,5 +1,15 @@
 <template>
-  <div :id="id" :style="chartStyle" v-loading="loadingChart"></div>
+<div class="wraps">
+    <div class="box">
+      <div class="cardBox">
+        <div class="tit1">
+      <span></span>
+      数据治理趋势（近30天）
+    </div>
+      <div class="line1" :id="id" :style="chartStyle" v-loading="loadingChart"></div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import { getChart2 } from "@/api/problemDataInspection.js"
@@ -21,23 +31,24 @@ export default {
       option: {
         color: ["rgb(45, 169, 250)", "#fcdb5b", "#1cc59c"],
         title: {
-          text: '数据治理问题情况统计图',
           left: 'center'
         },
         tooltip: {
-          trigger: 'axis'
-        },
+            trigger: "item",
+            formatter: "{a} <br/>{b} : {c} ({d}%)",
+          },
         legend: {
           // data: ['问题总量', '待整改', '已整改'],
           data:[],
           bottom: '0px'
         },
         grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '30px',
-          containLabel: true
-        },
+            top:"2%",
+            left: "3%",
+            right: "4%",
+            bottom: "5%",
+            containLabel: true,
+          },
         xAxis: {
           type: 'category',
           boundaryGap: false,
@@ -130,3 +141,76 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.wraps {
+  width: 100%;
+  height: 400px;
+  margin-top: 20px;
+  .box {
+    width: 100%;
+    height: 400px;
+    display: flex;
+  }
+  .cardBox{
+    background:#fff;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+     flex-direction: column;
+      width: 100%;
+    height: 400px;
+    display: flex;
+    
+  }
+  .line {
+    flex: 1;
+    // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    padding: 10px;
+  }
+  .line1 {
+    flex: 1;
+    // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    margin-left: 20px;
+    padding: 10px;
+  }
+  .tit {
+    color:black;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    float: left;
+    padding-left: 10px;
+    padding-right: 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    div {
+      span {
+        width: 4px;
+        height: 16px;
+        background: #15a1fa;
+        display: inline-block;
+        margin-right: 5px;
+        position: relative;
+        top: 2px;
+      }
+    }
+  }
+  .tit1 {
+    color:black;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    float: left;
+    padding-left: 10px;
+    box-sizing: border-box;
+    span {
+      width: 4px;
+      height: 16px;
+      background: #15a1fa;
+      display: inline-block;
+      margin-right: 5px;
+      position: relative;
+      top: 2px;
+    }
+  }
+}
+</style>

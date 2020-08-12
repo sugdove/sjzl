@@ -21,3 +21,9 @@ a, a:focus, a:hover {
 .el-menu--horizontal a:focus, a:hover {
   color: #303133;
 }
+.el-breadcrumb__inner a{
+  color: #2a76d2 !important; 
+}
+.el-breadcrumb__inner a:hover{
+  color: #409EFF !important; 
+}

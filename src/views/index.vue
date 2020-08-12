@@ -11,7 +11,7 @@
     height: 150px;">
       头部预留...
     </div> -->
-    <el-row>
+    <el-row style="background:#f3f8f9">
       <el-col :offset="2" span="3">
         <!-- <div style="font-family: 'Arial-BoldMT', 'Arial Bold', 'Arial', sans-serif;
     font-weight: 700;
@@ -33,10 +33,10 @@
       default-active="1"
       class="el-menu-vertical-demo"
       >
-      <el-menu-item index="1" @click.native="active = '1'">
+      <el-menu-item index="1" @click.native="active = '1'" style="background:#fff">
         <span slot="title" class="tree1"><img src="./problemDataInspection/img/fireProtect.png" class="imgTitle"></img>治理总览</span>
       </el-menu-item>
-      <el-menu-item index="2"  @click.native="active = '2'">
+      <el-menu-item index="2"  @click.native="active = '2'" style="background:#fff">
         <span slot="title" class="tree1"><img src="./problemDataInspection/img/service.png" class="imgTitle"></img>治理问题列表</span>
       </el-menu-item>
       <!-- <el-menu-item index="3"  @click.native="active = '3'">
@@ -88,7 +88,8 @@ export default {
 
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
-    min-height: 400px;
+    min-height: 993px;
+    background: rgb(243, 248, 249);
    
   }
   .pager-wrapper{
@@ -96,7 +97,7 @@ export default {
   }
   
   .tree{
-    width: 100%;
+    width: 110%;
     height: 60px;
     line-height: 60px;
     background: red;
