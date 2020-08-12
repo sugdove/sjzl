@@ -88,9 +88,13 @@ export default {
 
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
-    min-height: 993px;
-    background: rgb(243, 248, 249);
+    min-height: 700px;
+    border: 1px solid #dae2ee;
+    background:rgb(243, 248, 249)
    
+  }
+  .el-menu-item *{
+    margin-left:-6px
   }
   .pager-wrapper{
     float:right
@@ -100,35 +104,36 @@ export default {
     width: 110%;
     height: 60px;
     line-height: 60px;
-    background: red;
     color: #fff;
     margin-top: 20px;
     text-align: center;
-    font-size: 24px;
-    font-weight: 800;
     border-radius: 5px;
     background-image: url('./problemDataInspection/img/bg.png');
     background-size: 100% 100% ;
-    margin-left: -20px;
+    margin-left: -17px;
+    letter-spacing: 8px;
+    font-size: 25px;
+    font-weight: 400;
   }
   .el-menu-vertical-demo{
      border:1px solid #eee;
      padding: 30px;
      padding-top:0 ;
-     margin-left: -19px;
+     margin-left: -17px;
      border-top:none;
     /deep/
     .el-menu-item{
     width: 100%;
     height: 50px;
     line-height: 50px;
-    margin-top: 10px;
-    width: 220px;
+    font-size:18px;
+    margin-top: 3px;
+    width: 250px;
      margin-left: 23px;
      padding-left:30px;
      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
      color: #265aa3;
-      margin-left: -10px;
+      margin-left: -25px;
   }
   }
   .imgTitle{
