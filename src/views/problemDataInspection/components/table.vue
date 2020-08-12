@@ -56,7 +56,7 @@
         :name="item.name"
       ></el-tab-pane>
     </el-tabs>
-    <el-table :data="tableData" border v-loading="tableLoading" :header-cell-style="headClass">
+    <el-table :data="tableData" border v-loading="tableLoading" :header-cell-style="headClass" height="580px">
       <el-table-column type="index" label="序号" width="50"></el-table-column>
       <el-table-column label="库名" width="200" prop="schemaName"></el-table-column>
       <el-table-column label="表名" width="200" prop="tableName"></el-table-column>
