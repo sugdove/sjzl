@@ -34,8 +34,6 @@ export default {
           left: 'center'
         },
         tooltip: {
-            trigger: "item",
-            formatter: "{a} <br/>{b} : {c} ({d}%)",
           },
         legend: {
           // data: ['问题总量', '待整改', '已整改'],
