@@ -11,8 +11,8 @@
     height: 150px;">
       头部预留...
     </div> -->
-    <el-row style="background:#f3f8f9">
-      <el-col :offset="2" span="3">
+    <el-row style="background:#f3f8f9;padding: 20px 80px 0;margin: 0 auto;">
+      <div class='CatalogueList'>
         <!-- <div style="font-family: 'Arial-BoldMT', 'Arial Bold', 'Arial', sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -32,6 +32,7 @@
      <el-menu
       default-active="1"
       class="el-menu-vertical-demo"
+      active-text-color="#ea991b"
       >
       <el-menu-item index="1" @click.native="active = '1'" style="background:#fff">
         <span slot="title" class="tree1"><img src="./problemDataInspection/img/fireProtect.png" class="imgTitle"></img>治理总览</span>
@@ -46,12 +47,12 @@
 
         </div>
      
-    </el-col>
-    <el-col :span="17">
+    </div>
+    <div class="CatalogueTable">
           <dashbord v-if=" active==='1' "></dashbord>
           <myProblem v-if=" active==='2'" ></myProblem>
           <!-- <textSearch v-if=" active==='3'"></textSearch> -->
-    </el-col>
+    </div>
     </el-row>
   </div>
 </template>  
@@ -85,12 +86,22 @@ export default {
 }
 </script>
 <style lang='scss'>
-
+.CatalogueTable {
+    width: calc(100% - 260px);
+    float: left;
+    margin-top: 10px;
+    min-height: calc(100vh - 182px);
+}
+   .CatalogueList{
+     float: left;
+    width: 260px;
+    min-height: 400px;
+   }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
     min-height: 700px;
     border: 1px solid #dae2ee;
-    background:rgb(243, 248, 249)
+    background:rgb(243, 248, 249);
+        padding: 2px;
    
   }
   .el-menu-item *{
@@ -101,25 +112,21 @@ export default {
   }
   
   .tree{
-    width: 110%;
+    width: 100%;
     height: 60px;
     line-height: 60px;
     color: #fff;
     margin-top: 20px;
     text-align: center;
-    border-radius: 5px;
     background-image: url('./problemDataInspection/img/bg.png');
     background-size: 100% 100% ;
-    margin-left: -17px;
     letter-spacing: 8px;
     font-size: 25px;
     font-weight: 400;
   }
   .el-menu-vertical-demo{
      border:1px solid #eee;
-     padding: 30px;
      padding-top:0 ;
-     margin-left: -17px;
      border-top:none;
     /deep/
     .el-menu-item{
@@ -128,12 +135,10 @@ export default {
     line-height: 50px;
     font-size:18px;
     margin-top: 3px;
-    width: 250px;
-     margin-left: 23px;
+    background:#fff;
      padding-left:30px;
      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
      color: #265aa3;
-      margin-left: -25px;
   }
   }
   .imgTitle{
