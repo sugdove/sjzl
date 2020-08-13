@@ -58,10 +58,10 @@
     </el-tabs>
     <el-table :data="tableData" border v-loading="tableLoading" :header-cell-style="headClass" height="580px">
       <el-table-column type="index" label="序号" width="50"></el-table-column>
+       <el-table-column label="系统名称" width="200" prop="systemName"></el-table-column>
+      <el-table-column label="业务名称" width="200" prop="businessName"></el-table-column>
       <el-table-column label="库名" width="200" prop="schemaName"></el-table-column>
       <el-table-column label="表名" width="200" prop="tableName"></el-table-column>
-      <el-table-column label="系统名称" width="200" prop="systemName"></el-table-column>
-      <el-table-column label="业务名称" width="200" prop="businessName"></el-table-column>
       <el-table-column label="治理数据量" width="200" prop="totalCount"></el-table-column>
       <el-table-column label="已整改" width="200" prop="rectificationCount"></el-table-column>
       <el-table-column label="待整改" width="200" prop="invalidCount"></el-table-column>
