@@ -20,7 +20,7 @@
            <el-button type='danger' style="margin-left:10px" v-if="modifyBtnStatus" @click="modifyBtnStatus = !modifyBtnStatus">取消</el-button>
            <el-button type='success' style="margin-left:10px" v-if="modifyBtnStatus" @click="handleSave">保存</el-button>
            <div style="float:right">
-          <el-select v-model="searchfield" placeholder="字段名" style="width:100px;margin:0px 10px" clearable>
+          <el-select v-model="searchfield" placeholder="字段名" v-if="!modifyBtnStatus && chooseTab == 'invalid'" style="width:150px;margin:0px 10px" clearable>
             <el-option
             v-for="(item,index) in searchfieldList"
             :key="index"
@@ -28,7 +28,7 @@
             :label="item"
             ></el-option>
           </el-select>
-          <el-input style="width:200px" v-model="searchkey" placeholder="问题规则"></el-input>
+          <!--<el-input style="width:200px" v-model="searchkey" placeholder="问题规则"></el-input>-->
           </div>
         </div>
         
@@ -82,13 +82,14 @@
         :label="key"
         :key="index"
         :prop="key"
-        v-if="key!=='dlp_reject_reason' && key!=='dsg_rowid'"
+        v-if="key!=='dlp_reject_reason' && key!=='dsg_rowid' && key!=='dsg_last_update_field'"
         show-overflow-tooltip
       >
         <template slot-scope="scope">
-          <div>{{scope.row[key].value}}</div>
+          <div v-if="!updateMes(scope.row[key].field,scope.row)">{{scope.row[key].value}}</div>
+          <div v-if="updateMes(scope.row[key].field,scope.row)" style="color:#409EFF">{{updateMes(scope.row[key].field,scope.row)}}</div>
           <div v-if="scope.row[key].sourceInfo">{{scope.row[key].sourceInfo}}</div>
-          <div v-if="reasonMes(scope.row[key].field,scope.row) && !modifyBtnStatus" style="color:red">{{reasonMes(scope.row[key].field,scope.row)}}</div>
+          <div v-if="reasonMes(scope.row[key].field,scope.row) && !modifyBtnStatus &&!updateMes(scope.row[key].field,scope.row)" style="color:red">{{reasonMes(scope.row[key].field,scope.row)}}</div>
           <el-input v-model="modifyForm[scope.$index][value.field]"  v-if="reasonMes(scope.row[key].field,scope.row) && modifyBtnStatus && value.type==='string'"></el-input>
           <el-input type="number" v-model.number="modifyForm[scope.$index][value.field]"  v-if="reasonMes(scope.row[key].field,scope.row) && modifyBtnStatus && value.type==='int'"></el-input>
           <el-date-picker value-format="yyyy-MM-dd" v-model="modifyForm[scope.$index][value.field]" type="date"  v-if="reasonMes(scope.row[key].field,scope.row) && modifyBtnStatus && value.type==='date'"></el-date-picker>
@@ -186,6 +187,7 @@ export default {
     },
     chooseTab (val) {
       if (val !== 'total') {
+        this.searchfield = ''
         this.flowPage.page = 1
         this.getTableList()
       }
@@ -279,12 +281,26 @@ export default {
       })
       return reason
     },
+    // 处理dsg_last_update_field
+    updateMes(key, row) {
+      if (!row.dsg_last_update_field) return ''
+      const fieldArr = row.dsg_last_update_field
+      let update = ''
+      fieldArr.forEach(el => {
+        // 此处排除了下后台的返回错误
+           if (el.toLowerCase() === key) {
+          update = row[key].value
+        }
+      })
+      return update
+    },
     // 点击整改时组装对象
     getModifyForm(){
       const tableData = JSON.parse(JSON.stringify(this.tableData))
       const arrObj = []
       tableData.forEach(el=>{
         const arrObj2 = {}
+        arrObj2['partition_time'] = el['采集时间'].partition_time
         // dsg_rowid存在则取dsg_rowid对象下的value值 否则为空字符串
         if(el.dsg_rowid){
           arrObj2['dsg_rowid'] = el.dsg_rowid.value
