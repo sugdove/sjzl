@@ -15,7 +15,7 @@
     font-style: normal;margin: 0px 0px 10px 0px;">
            {{`${chooseRow.systemName ? chooseRow.systemName : '未指定'} > ${chooseRow.businessName ? chooseRow.businessName : '未指定'}`}}
           <a :href="`/curd_/dsgDataGovern/exportProblemData?metadataId=${chooseRow.hashedName}&orgId=1&entityId=${chooseRow.entityId}&isMine=${isMine}`">
-           <el-button type='primary' style="margin-left:10px">导出</el-button></a>
+           <el-button type='primary' style="margin-left:10px" v-if="!modifyBtnStatus && chooseTab == 'invalid'">导出</el-button></a>
            <el-button type='warning' style="margin-left:10px" v-if="!modifyBtnStatus && chooseTab == 'invalid'" @click="handleModify">整改</el-button>
            <el-button type='danger' style="margin-left:10px" v-if="modifyBtnStatus" @click="modifyBtnStatus = !modifyBtnStatus">取消</el-button>
            <el-button type='success' style="margin-left:10px" v-if="modifyBtnStatus" @click="handleSave">保存</el-button>
@@ -86,8 +86,8 @@
         show-overflow-tooltip
       >
         <template slot-scope="scope">
-          <div v-if="!updateMes(scope.row[key].field,scope.row)">{{scope.row[key].value}}</div>
-          <div v-if="updateMes(scope.row[key].field,scope.row)" style="color:#409EFF">{{updateMes(scope.row[key].field,scope.row)}}</div>
+          <div v-if="updateMes(scope.row[key].field,scope.row) && chooseTab == 'modify'" style="color:#409EFF">{{updateMes(scope.row[key].field,scope.row)}}</div>
+          <div v-else>{{scope.row[key].value}}</div>
           <div v-if="scope.row[key].sourceInfo">{{scope.row[key].sourceInfo}}</div>
           <div v-if="reasonMes(scope.row[key].field,scope.row) && !modifyBtnStatus &&!updateMes(scope.row[key].field,scope.row)" style="color:red">{{reasonMes(scope.row[key].field,scope.row)}}</div>
           <el-input v-model="modifyForm[scope.$index][value.field]"  v-if="reasonMes(scope.row[key].field,scope.row) && modifyBtnStatus && value.type==='string'"></el-input>
