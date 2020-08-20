@@ -326,13 +326,23 @@ export default {
     },
     // 对比对象进行传参组装
     getComparedParams(){
-      const startArrobj = this.modifyFormStart
-      const endArrObj = this.modifyForm
-      console.log(startArrobj,'startArrobj')
+      const startArrObj = this.modifyFormStart
+      let endArrObj = JSON.parse(JSON.stringify(this.modifyForm))
+      console.log(startArrObj,'startArrObj')
       console.log(endArrObj,'endArrObj')
       const changeArrObj = []
-      for(let i = 0;i<startArrobj.length;i++){
-        if(JSON.stringify(Object.values(startArrobj[i])) !== JSON.stringify(Object.values(endArrObj[i]))){
+      for(let i = 0;i<startArrObj.length;i++){
+          // 一层判断该行数据是否被改变过
+        if(JSON.stringify(Object.values(startArrObj[i])) !== JSON.stringify(Object.values(endArrObj[i]))){
+          // 二层判断对应某个数据改变了才push进（处理方法：不为partition_time和dsg_rowid的key对应值相同的话则删除此属性并push进改变的数组中）
+          for(let key in startArrObj[i]){
+            if(key !== 'partition_time' && key !== 'dsg_rowid'){
+              if(startArrObj[i][key] === endArrObj[i][key]){
+                delete endArrObj[i][key]
+                console.log(endArrObj[i],'endArrObj[i]')
+              }
+            }
+          }
           changeArrObj.push(endArrObj[i])
         }
       }
