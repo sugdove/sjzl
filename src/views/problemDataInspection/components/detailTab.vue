@@ -28,6 +28,14 @@
             :label="item"
             ></el-option>
           </el-select>
+          <el-select v-model="searchkey"  placeholder="问题规则" v-if="!modifyBtnStatus && chooseTab == 'invalid'" style="width:200px" clearable>
+            <el-option
+            v-for="(item,index) in searchDesList"
+            :key="index"
+            :value="getValue(item)"
+            :label="item.label"
+            ></el-option>
+          </el-select>
           <!--<el-input style="width:200px" v-model="searchkey" placeholder="问题规则"></el-input>-->
           </div>
         </div>
@@ -105,7 +113,7 @@
   </div>
 </template>
 <script>
-import { getDetailTable, getDetailNumber,getFields,updateErrorData } from '@/api/problemDataInspection.js'
+import { getDetailTable, getDetailNumber,getFields,updateErrorData,getRuleDes } from '@/api/problemDataInspection.js'
 export default {
   props: {
     chooseRow: {
@@ -164,6 +172,7 @@ export default {
         }
       ],
       searchfieldList:[],
+      searchDesList:[],
       searchfield:'',
       searchkey:'',
       modifyBtnStatus:false,
@@ -182,6 +191,7 @@ export default {
       this.chooseTab = 'invalid'
       this.flowPage.page = 1
       this.getFields()
+      this.getRuleDes()
       this.getTableList()
       this.getDetailNumber()
     },
@@ -210,7 +220,7 @@ export default {
         isMine: this.isMine,
         id: this.chooseRow.entityId,
         searchkey:this.searchkey,
-        searchfield:this.searchfield,
+        // searchfield:this.searchfield,
         modifyFlag: this.chooseTab === 'modify' ? '0' : '1'
         // orgId: 1
       }
@@ -236,6 +246,21 @@ export default {
       }
       getFields(params).then(res=>{
          this.searchfieldList = res.data
+      })
+    },
+    // getRuleDes
+    getRuleDes(){
+      const params = {
+        validator: this.chooseTab,
+        isMine: this.isMine,
+        id: this.chooseRow.entityId,
+      }
+      getRuleDes(params).then(res=>{
+         this.searchDesList = res.data.map(el=>{
+           for(let key in el){
+             return {label:key,value:el[key]}
+           }
+         })
       })
     },
     getDetailNumber () {
@@ -406,10 +431,16 @@ export default {
            this.$message.error(res.msg)
         }
       })
+    },
+    getValue(item){
+      const obj = {};
+      obj[item.label] = item.value
+      return JSON.stringify(obj)
     }
   },
   mounted () {
     this.getFields()
+    this.getRuleDes()
     this.getTableList()
     this.getDetailNumber()
   },

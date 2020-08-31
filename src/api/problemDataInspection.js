@@ -28,6 +28,14 @@ export const getFields = params => {
     params
   });
 };
+// 数据治理规则意思
+export const getRuleDes = params => {
+  return request({
+    url: prefixUrl + `/curd_/dsgDataGovern/query/queryallRuleAndRuleEn`,
+    method: "get",
+    params
+  });
+};
 // 数据治理总数
 export const getDetailNumber = params => {
   return request({
@@ -90,4 +98,3 @@ export const updateErrorData = (params) => {
     data:params
   });
 };
-
