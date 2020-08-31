@@ -214,14 +214,16 @@ export default {
     getTableList () {
       this.tableLoading = true
       const params = {
+        other:{
         page: this.flowPage.page,
         size: this.flowPage.size,
         validator: this.chooseTab === 'modify' ? 'invalid' : this.chooseTab,
         isMine: this.isMine,
         id: this.chooseRow.entityId,
-        searchkey:this.searchkey,
         // searchfield:this.searchfield,
         modifyFlag: this.chooseTab === 'modify' ? '0' : '1'
+        },
+        searchkey:this.searchkey ? JSON.parse(this.searchkey) : {}  ,
         // orgId: 1
       }
       getDetailTable(params).then(res => {

@@ -14,9 +14,10 @@ export const getTable = params => {
 export const getDetailTable = params => {
   return request({
     // url: prefixUrl + '/curd_/dsgLable/lableList',
-    url: prefixUrl + `/curd_/dsgDataGovern/query/${params.id}`,
-    method: "get",
-    params
+    url: prefixUrl + `/curd_/dsgDataGovern/query/${params.other.id}`,
+    method: "post",
+    params:params.other,
+    data:params.searchkey
   });
 };
 // 数据治理字段列表
