@@ -94,10 +94,10 @@
         show-overflow-tooltip
       >
         <template slot-scope="scope">
-          <div v-if="updateMes(scope.row[key].field,scope.row) && chooseTab == 'modify'" style="color:#409EFF">{{updateMes(scope.row[key].field,scope.row)}}</div>
+          <div v-if="updateMes(key,scope.row) && chooseTab == 'modify'" style="color:#409EFF">{{updateMes(key,scope.row)}}</div>
           <div v-else>{{scope.row[key].value}}</div>
           <div v-if="scope.row[key].sourceInfo">{{scope.row[key].sourceInfo}}</div>
-          <div v-if="reasonMes(scope.row[key].field,scope.row) && !modifyBtnStatus &&!updateMes(scope.row[key].field,scope.row)" style="color:red">{{reasonMes(scope.row[key].field,scope.row)}}</div>
+          <div v-if="reasonMes(scope.row[key].field,scope.row) && !modifyBtnStatus &&!updateMes(key,scope.row)" style="color:red">{{reasonMes(scope.row[key].field,scope.row)}}</div>
           <el-input v-model="modifyForm[scope.$index][value.field]"  v-if="reasonMes(scope.row[key].field,scope.row) && modifyBtnStatus && value.type==='string'"></el-input>
           <el-input type="number" v-model.number="modifyForm[scope.$index][value.field]"  v-if="reasonMes(scope.row[key].field,scope.row) && modifyBtnStatus && value.type==='int'"></el-input>
           <el-date-picker value-format="yyyy-MM-dd" v-model="modifyForm[scope.$index][value.field]" type="date"  v-if="reasonMes(scope.row[key].field,scope.row) && modifyBtnStatus && value.type==='date'"></el-date-picker>
@@ -220,7 +220,7 @@ export default {
         validator: this.chooseTab === 'modify' ? 'invalid' : this.chooseTab,
         isMine: this.isMine,
         id: this.chooseRow.entityId,
-        // searchfield:this.searchfield,
+        searchfield:this.searchfield,
         modifyFlag: this.chooseTab === 'modify' ? '0' : '1'
         },
         searchkey:this.searchkey ? JSON.parse(this.searchkey) : {}  ,
@@ -315,7 +315,7 @@ export default {
       let update = ''
       fieldArr.forEach(el => {
         // 此处排除了下后台的返回错误
-           if (el.toLowerCase() === key) {
+           if (el.toLowerCase() === row[key].field) {
           update = row[key].value
         }
       })
