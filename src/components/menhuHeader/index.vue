@@ -4,10 +4,10 @@
       <div class="top_header_main">
         <div class="title">
           <div class="title_logo">
-            <img src="./img/logo.png" alt />
-            <div class="title_logo_desc">
-              <p>重庆市消防救援总队</p>
-              <p>数据资产管理系统</p>
+            <!--<img src="./img/logo.png" alt /> -->
+             <div class="title_logo_desc">
+              <p>数据治理系统</p>
+              <!--<p>数据资产管理系统</p>-->
             </div>
           </div>
         </div>
