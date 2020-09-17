@@ -1,5 +1,5 @@
 // 定义系统变量-在index.html全局引入  type: 0 内部, 1外部链接, -1不跳转
-window.APP_DATA = {
+export const APP_DATA = {
   title: '数据治理系统',
   menus: [
     {

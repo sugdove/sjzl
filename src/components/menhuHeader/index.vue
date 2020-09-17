@@ -62,43 +62,23 @@
     <div class="login_header">
       <div class="login_header_main">
         <div class="menu">
-          <el-menu
-            :default-active="activeMenu"
-            class="navs_home"
-            mode="horizontal"
-            @select="handleSelect"
-          >
+          <el-menu class="navs_home" mode="horizontal" :default-active="activeMenuIndex">
             <template v-for="(item,index) in data">
               <template v-if="!item.children">
-                <el-menu-item :index="item.url" :key="index">
-                  <a style="font-size:18px" :href="item.url + '?token=' + getToken()">{{item.name}}</a>
+                <el-menu-item :key="index" :index="item.id" :class="{'is-active':menuActive(item.url)}">
+                  <span style="font-size:18px;display: block;" @click="handleSelect(item.id,item)">{{item.name}}</span>
                 </el-menu-item>
               </template>
               <template v-else>
-                <el-submenu :index="item.path" :key="index">
+                <el-submenu :key="index" :index="item.id">
                   <template slot="title">{{item.name}}</template>
-                  <el-menu-item
-                    v-for="(_item,index) in item.children"
-                    :index="_item.path"
-                    :key="index"
-                    class="el-menu_sub_wrap"
-                  >
-                    <a style="display:block;" :href="_item.path">{{_item.name}}</a>
+                  <el-menu-item v-for="(_item,_index) in item.children" :index="_item.id" :key="_index" class="el-menu_sub_wrap">
+                    <span style="font-size:14px;display: block;" @click="handleSelect(item.id,_item)">{{_item.name}}</span>
                   </el-menu-item>
                 </el-submenu>
               </template>
             </template>
           </el-menu>
-          <!-- <div class="search">
-            <el-form :inline="true">
-              <el-form-item>
-                <el-input style="width:245px" v-model="searchValue" placeholder="输入您想查找的信息进行搜索"></el-input>
-              </el-form-item>
-              <el-form-item class="searchBtn">
-                <el-button class="el-icon-search" @click="searchFn" type="text" circle></el-button>
-              </el-form-item>
-            </el-form>
-          </div>-->
         </div>
         <!-- <div class="shine shine2"></div> -->
       </div>
@@ -111,6 +91,7 @@ import { mapState } from "vuex";
 import { getToken } from "@/utils/auth";
 import { removeToken } from "@/utils/auth";
 import { getInfo } from "@/api/menhu.js";
+import { APP_DATA } from "@/assets/mockData.js"
 import { buildMenus, msgStatus, getAvatar } from "@/api/menu";
 const originURL = window.location.origin;
 export default {
@@ -127,7 +108,8 @@ export default {
       adminURL: originURL + "/menhu",
       searchValue: "",
       msgMun: 0,
-      data: [],
+      title:APP_DATA.title,
+      data:APP_DATA.menus,
       avatar: "",
       otherPath: "/admin/#/portal/system",
       user: "",
@@ -141,33 +123,33 @@ export default {
   },
   mounted() {
     this.getInfo();
-    buildMenus({ portal: 2, level: 1 }).then((res) => {
-      this.otherName = res[0].name;
-    });
-    buildMenus({ portal: 1, level: 2 }).then((res) => {
-      let menuData = [];
-      let OriginData = this.data;
-      res.forEach((item) => {
-        if (item.children.length > 1) {
-          menuData.push({
-            name: item.name,
-            url: item.path,
-            path: item.component,
-            redirect: item.redirect,
-            children: item.children ? item.children : [],
-          });
-        } else {
-          menuData.push({
-            name: item.name,
-            url: item.path,
-            path: item.component,
-            redirect: item.redirect,
-          });
-        }
-      });
-      this.data = menuData;
-    });
-    this.menuActive();
+    // buildMenus({ portal: 2, level: 1 }).then((res) => {
+    //   this.otherName = res[0].name;
+    // });
+    // buildMenus({ portal: 1, level: 2 }).then((res) => {
+    //   let menuData = [];
+    //   let OriginData = this.data;
+    //   res.forEach((item) => {
+    //     if (item.children.length > 1) {
+    //       menuData.push({
+    //         name: item.name,
+    //         url: item.path,
+    //         path: item.component,
+    //         redirect: item.redirect,
+    //         children: item.children ? item.children : [],
+    //       });
+    //     } else {
+    //       menuData.push({
+    //         name: item.name,
+    //         url: item.path,
+    //         path: item.component,
+    //         redirect: item.redirect,
+    //       });
+    //     }
+    //   });
+    //   this.data = menuData;
+    // });
+    // this.menuActive();
   },
   methods: {
     open() {
@@ -230,9 +212,9 @@ export default {
     },
   },
   watch: {
-    ["$route.path"](val) {
-      this.menuActive();
-    },
+    // ["$route.path"](val) {
+    //   this.menuActive();
+    // },
   },
 };
 </script>
@@ -420,7 +402,7 @@ export default {
       .navs_home {
         .el-menu-item {
           /* width: 170px; */
-          width: 90px;
+          width: 113px;
           text-align: center;
           /* height: 61px; */
           color: #fff;
